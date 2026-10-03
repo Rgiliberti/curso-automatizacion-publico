@@ -1,0 +1,12 @@
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Material privado del curso: no subir
+material/
+docs/
+resumen/
+*.pdf
+*.jpg
+*.jpeg
+*.png
