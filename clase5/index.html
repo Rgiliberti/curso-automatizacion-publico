@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Modular</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+    <main class="contenedor-calculadora">
+        <header class="encabezado">
+            <h1 id="titulo-principal">Calculadora Modular</h1>
+            <p id="descripcion" class="descripcion">
+                Ingresá dos números, elegí una operación y presioná Calcular.
+            </p>
+        </header>
+
+        <form id="form-calculadora" class="form-calculadora" action="#" method="post">
+            <div class="campo">
+                <label for="num1">Número 1</label>
+                <input type="number" id="num1" name="num1" class="input-numero" step="any" required>
+            </div>
+
+            <div class="campo">
+                <label for="num2">Número 2</label>
+                <input type="number" id="num2" name="num2" class="input-numero" step="any" required>
+            </div>
+
+            <fieldset id="grupo-operacion" class="grupo-operacion">
+                <legend>Operación</legend>
+
+                <div class="opcion">
+                    <input type="radio" id="op-sumar" name="operacion" value="sumar" checked>
+                    <label for="op-sumar">Sumar</label>
+                </div>
+                <div class="opcion">
+                    <input type="radio" id="op-restar" name="operacion" value="restar">
+                    <label for="op-restar">Restar</label>
+                </div>
+                <div class="opcion">
+                    <input type="radio" id="op-multiplicar" name="operacion" value="multiplicar">
+                    <label for="op-multiplicar">Multiplicar</label>
+                </div>
+                <div class="opcion">
+                    <input type="radio" id="op-dividir" name="operacion" value="dividir">
+                    <label for="op-dividir">Dividir</label>
+                </div>
+            </fieldset>
+
+            <button type="submit" id="btn-calcular" class="btn btn-primario">Calcular</button>
+        </form>
+    </main>
+</body>
+</html>

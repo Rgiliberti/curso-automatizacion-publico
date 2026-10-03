@@ -10,6 +10,7 @@ Ejercicios resueltos del curso de Automation Testing (Módulo 1: Fundamentos).
 | [Clase 2](clase2/) | Fundamentos de Python (parte 1) | Datos personales, 10 números pares, calculadora lineal |
 | [Clase 3](clase3/) | Fundamentos de Python (parte 2) y Git | Calculadora modular con funciones y excepciones |
 | [Clase 4](clase4/) | Introducción a Pytest | Suite de pruebas, markers y reporte HTML |
+| [Clase 5](clase5/) | HTML, CSS y DevTools | Vista estática de la calculadora y tabla de selectores |
 
 ## Cómo ejecutar
 
@@ -26,4 +27,6 @@ python -m pytest -m smoke
 python -m pytest -m exception
 python -m pytest --html=report.html --self-contained-html
 ```
+
+Clase 5: abrir `clase5/index.html` en el navegador (no requiere servidor).
 
