@@ -1,7 +1,7 @@
 """Configuración compartida por todos los tests (pytest carga este archivo solo).
 
 - Fixture `driver`: un navegador nuevo por test, así los tests son independientes.
-- Si un test falla: captura de pantalla en reports/capturas/ y línea ERROR en el log.
+- Si un test falla: captura de pantalla en reports/capturas/ y adjunta al reporte HTML.
 """
 import logging
 from datetime import datetime
@@ -40,4 +40,11 @@ def pytest_runtest_makereport(item, call):
         navegador.save_screenshot(str(archivo))
         # En el log va la ruta relativa al proyecto (sin datos de la máquina local)
         logger.error('Falló %s. Captura guardada en %s', item.name, archivo.relative_to(CARPETA_PROYECTO))
+
+        # Adjuntar la misma captura dentro del reporte HTML de pytest-html
+        pytest_html = item.config.pluginmanager.getplugin('html')
+        if pytest_html is not None:
+            extras = getattr(reporte, 'extras', [])
+            extras.append(pytest_html.extras.image(navegador.get_screenshot_as_base64()))
+            reporte.extras = extras
     return reporte
