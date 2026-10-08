@@ -3,8 +3,12 @@
 Cada test recibe su propio navegador (fixture `driver` de conftest.py),
 así la falla de uno no afecta a los demás.
 """
+import logging
+
 from utils import selectores
 from utils.helpers import esperar_clickeable, esperar_todos_visibles, esperar_url, esperar_visible, login
+
+logger = logging.getLogger('saucedemo')
 
 
 # ---------- 1. Login ----------
@@ -17,6 +21,7 @@ def test_login_exitoso(driver):
     assert driver.title == 'Swag Labs', f'Título de la pestaña inesperado: {driver.title}'
     titulo = esperar_visible(driver, selectores.TITULO_SECCION).text
     assert titulo == 'Products', f'Título de sección inesperado: {titulo}'
+    logger.info('Login OK. Título de sección: %s', titulo)
 
 
 # ---------- 2. Navegación y catálogo ----------
@@ -32,6 +37,7 @@ def test_catalogo_inventario(driver):
     # Productos visibles (al menos uno)
     productos = esperar_todos_visibles(driver, selectores.PRODUCTOS)
     assert len(productos) > 0, 'No hay productos visibles'
+    logger.info('Productos visibles: %d', len(productos))
 
     # Elementos importantes de la interfaz: menú, filtro de orden y carrito
     assert driver.find_element(*selectores.BOTON_MENU).is_displayed(), 'No se ve el menú'
@@ -44,6 +50,7 @@ def test_catalogo_inventario(driver):
     precio = primero.find_element(*selectores.PRECIO_PRODUCTO).text
     assert nombre != '', 'El primer producto no tiene nombre'
     assert precio.startswith('$'), f'Precio con formato inesperado: {precio}'
+    logger.info('Primer producto: %s - %s', nombre, precio)
 
 
 # ---------- 3. Carrito ----------
@@ -57,6 +64,7 @@ def test_agregar_producto_al_carrito(driver):
 
     nombre = esperar_visible(driver, selectores.NOMBRE_PRODUCTO).text
     esperar_clickeable(driver, selectores.BOTON_AGREGAR).click()
+    logger.info('Agregado al carrito: %s', nombre)
 
     # Espera explícita del badge del carrito
     contador = esperar_visible(driver, selectores.CONTADOR_CARRITO).text
@@ -67,3 +75,4 @@ def test_agregar_producto_al_carrito(driver):
     esperar_url(driver, '/cart.html')
     en_carrito = [item.text for item in esperar_todos_visibles(driver, selectores.NOMBRES_EN_CARRITO)]
     assert nombre in en_carrito, f'{nombre} no aparece en el carrito: {en_carrito}'
+    logger.info('Productos en el carrito: %s', en_carrito)

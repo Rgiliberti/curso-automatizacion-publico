@@ -3,6 +3,7 @@
 Lo que se repite entre tests vive acá: crear el navegador, esperar elementos
 y hacer login. Así los tests quedan cortos y legibles.
 """
+import logging
 import os
 
 from selenium import webdriver
@@ -10,6 +11,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 from utils import selectores
+
+logger = logging.getLogger('saucedemo')
 
 URL = 'https://www.saucedemo.com/'
 USUARIO = 'standard_user'
@@ -69,9 +72,12 @@ def escribir(driver, selector, texto):
 
 def login(driver):
     """Abre SauceDemo, ingresa con el usuario válido y espera a llegar al inventario."""
+    logger.info('Abriendo %s', URL)
     driver.get(URL)
     escribir(driver, selectores.CAMPO_USUARIO, USUARIO)
     escribir(driver, selectores.CAMPO_CLAVE, CLAVE)
+    logger.info('Login con usuario "%s"', USUARIO)
     esperar_clickeable(driver, selectores.BOTON_LOGIN).click()
     # Espera explícita: después del clic, la URL tiene que cambiar a /inventory.html
     esperar_url(driver, '/inventory.html')
+    logger.info('Inventario cargado: %s', driver.current_url)
