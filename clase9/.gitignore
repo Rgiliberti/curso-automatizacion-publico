@@ -1,0 +1,8 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# Los reportes de reports/ SÍ se suben: son parte de la entrega
