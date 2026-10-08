@@ -3,17 +3,20 @@
 Cada test recibe su propio navegador (fixture `driver` de conftest.py),
 así la falla de uno no afecta a los demás.
 """
-
-from utils.helpers import login
+from utils import selectores
+from utils.helpers import esperar_visible, login
 
 
 # ---------- 1. Login ----------
 
 def test_login_exitoso(driver):
     """Con credenciales válidas se llega al inventario."""
-    login(driver)
-    # TODO: validar URL /inventory.html, título "Swag Labs" y sección "Products"
-    assert ...
+    login(driver)  # incluye la espera explícita de /inventory.html
+
+    assert '/inventory.html' in driver.current_url, f'URL inesperada: {driver.current_url}'
+    assert driver.title == 'Swag Labs', f'Título de la pestaña inesperado: {driver.title}'
+    titulo = esperar_visible(driver, selectores.TITULO_SECCION).text
+    assert titulo == 'Products', f'Título de sección inesperado: {titulo}'
 
 
 # ---------- 2. Navegación y catálogo ----------

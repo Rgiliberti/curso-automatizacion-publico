@@ -12,4 +12,6 @@ CAMPO_USUARIO = (By.ID, 'user-name')
 CAMPO_CLAVE = (By.NAME, 'password')
 BOTON_LOGIN = (By.CSS_SELECTOR, 'input[type="submit"]')
 
-# TODO: selectores de la página de inventario y del carrito
+# Página de inventario
+TITULO_SECCION = (By.CSS_SELECTOR, '.title')
+# TODO: productos, menú, filtro de orden y carrito
