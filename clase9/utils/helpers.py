@@ -9,6 +9,8 @@ from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
+from utils import selectores
+
 URL = 'https://www.saucedemo.com/'
 USUARIO = 'standard_user'
 CLAVE = 'secret_sauce'
@@ -67,4 +69,9 @@ def escribir(driver, selector, texto):
 
 def login(driver):
     """Abre SauceDemo, ingresa con el usuario válido y espera a llegar al inventario."""
-    ...  # TODO: completar usuario y clave, clic en Login y esperar /inventory.html
+    driver.get(URL)
+    escribir(driver, selectores.CAMPO_USUARIO, USUARIO)
+    escribir(driver, selectores.CAMPO_CLAVE, CLAVE)
+    esperar_clickeable(driver, selectores.BOTON_LOGIN).click()
+    # Espera explícita: después del clic, la URL tiene que cambiar a /inventory.html
+    esperar_url(driver, '/inventory.html')
