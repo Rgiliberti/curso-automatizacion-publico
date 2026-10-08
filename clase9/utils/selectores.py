@@ -14,4 +14,14 @@ BOTON_LOGIN = (By.CSS_SELECTOR, 'input[type="submit"]')
 
 # Página de inventario
 TITULO_SECCION = (By.CSS_SELECTOR, '.title')
-# TODO: productos, menú, filtro de orden y carrito
+PRODUCTOS = (By.CSS_SELECTOR, '.inventory_item')
+NOMBRE_PRODUCTO = (By.CSS_SELECTOR, '.inventory_item_name')
+PRECIO_PRODUCTO = (By.CSS_SELECTOR, '.inventory_item_price')
+BOTON_AGREGAR = (By.CSS_SELECTOR, 'button[id^="add-to-cart"]')
+BOTON_MENU = (By.ID, 'react-burger-menu-btn')
+FILTRO_ORDEN = (By.CSS_SELECTOR, 'select.product_sort_container')
+
+# Carrito (ícono del encabezado y página del carrito)
+ICONO_CARRITO = (By.CSS_SELECTOR, '.shopping_cart_link')
+CONTADOR_CARRITO = (By.CSS_SELECTOR, '.shopping_cart_badge')
+NOMBRES_EN_CARRITO = (By.CSS_SELECTOR, '.cart_item .inventory_item_name')
