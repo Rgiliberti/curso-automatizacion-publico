@@ -1,0 +1,20 @@
+2026-10-07 22:45:58 [INFO] Navegador abierto
+2026-10-07 22:45:58 [INFO] Abriendo https://www.saucedemo.com/
+2026-10-07 22:45:59 [INFO] Login con usuario "standard_user"
+2026-10-07 22:45:59 [INFO] Inventario cargado: https://www.saucedemo.com/inventory.html
+2026-10-07 22:45:59 [INFO] Login OK. Título de sección: Products
+2026-10-07 22:46:01 [INFO] Navegador cerrado
+2026-10-07 22:46:03 [INFO] Navegador abierto
+2026-10-07 22:46:03 [INFO] Abriendo https://www.saucedemo.com/
+2026-10-07 22:46:03 [INFO] Login con usuario "standard_user"
+2026-10-07 22:46:03 [INFO] Inventario cargado: https://www.saucedemo.com/inventory.html
+2026-10-07 22:46:03 [INFO] Productos visibles: 6
+2026-10-07 22:46:04 [INFO] Primer producto: Sauce Labs Backpack - $29.99
+2026-10-07 22:46:06 [INFO] Navegador cerrado
+2026-10-07 22:46:07 [INFO] Navegador abierto
+2026-10-07 22:46:07 [INFO] Abriendo https://www.saucedemo.com/
+2026-10-07 22:46:08 [INFO] Login con usuario "standard_user"
+2026-10-07 22:46:08 [INFO] Inventario cargado: https://www.saucedemo.com/inventory.html
+2026-10-07 22:46:08 [INFO] Agregado al carrito: Sauce Labs Backpack
+2026-10-07 22:46:08 [INFO] Productos en el carrito: ['Sauce Labs Backpack']
+2026-10-07 22:46:10 [INFO] Navegador cerrado
