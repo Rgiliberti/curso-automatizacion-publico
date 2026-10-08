@@ -4,7 +4,7 @@ Cada test recibe su propio navegador (fixture `driver` de conftest.py),
 así la falla de uno no afecta a los demás.
 """
 from utils import selectores
-from utils.helpers import esperar_todos_visibles, esperar_visible, login
+from utils.helpers import esperar_clickeable, esperar_todos_visibles, esperar_url, esperar_visible, login
 
 
 # ---------- 1. Login ----------
@@ -51,5 +51,19 @@ def test_catalogo_inventario(driver):
 def test_agregar_producto_al_carrito(driver):
     """Agregar el primer producto incrementa el contador y el producto aparece en el carrito."""
     login(driver)
-    # TODO: agregar el primer producto, verificar contador = 1 y que aparezca en el carrito
-    assert ...
+
+    # Antes de agregar, el carrito está vacío: el contador ni siquiera existe
+    assert driver.find_elements(*selectores.CONTADOR_CARRITO) == [], 'El carrito debería empezar vacío'
+
+    nombre = esperar_visible(driver, selectores.NOMBRE_PRODUCTO).text
+    esperar_clickeable(driver, selectores.BOTON_AGREGAR).click()
+
+    # Espera explícita del badge del carrito
+    contador = esperar_visible(driver, selectores.CONTADOR_CARRITO).text
+    assert contador == '1', f'El contador muestra {contador} en vez de 1'
+
+    # Ir al carrito y comprobar que el producto está en la lista
+    driver.find_element(*selectores.ICONO_CARRITO).click()
+    esperar_url(driver, '/cart.html')
+    en_carrito = [item.text for item in esperar_todos_visibles(driver, selectores.NOMBRES_EN_CARRITO)]
+    assert nombre in en_carrito, f'{nombre} no aparece en el carrito: {en_carrito}'
