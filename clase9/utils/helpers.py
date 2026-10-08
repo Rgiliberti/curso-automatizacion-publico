@@ -6,10 +6,13 @@ y hacer login. Así los tests quedan cortos y legibles.
 import os
 
 from selenium import webdriver
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 URL = 'https://www.saucedemo.com/'
 USUARIO = 'standard_user'
 CLAVE = 'secret_sauce'
+TIEMPO_MAXIMO = 10  # segundos que aguanta cada espera explícita
 
 
 def crear_driver():
@@ -31,7 +34,35 @@ def crear_driver():
     return webdriver.Chrome(options=opciones)
 
 
-# TODO: funciones de espera explícita (elemento visible, clickeable, cambio de URL)
+def esperar_visible(driver, selector, tiempo=TIEMPO_MAXIMO):
+    """Espera a que el elemento se vea en pantalla y lo devuelve."""
+    return WebDriverWait(driver, tiempo).until(
+        EC.visibility_of_element_located(selector), f'No se vio el elemento {selector} en {tiempo} s')
+
+
+def esperar_todos_visibles(driver, selector, tiempo=TIEMPO_MAXIMO):
+    """Espera a que se vean los elementos que coinciden con el selector y devuelve la lista."""
+    return WebDriverWait(driver, tiempo).until(
+        EC.visibility_of_all_elements_located(selector), f'No se vieron elementos {selector} en {tiempo} s')
+
+
+def esperar_clickeable(driver, selector, tiempo=TIEMPO_MAXIMO):
+    """Espera a que el elemento se pueda clickear y lo devuelve."""
+    return WebDriverWait(driver, tiempo).until(
+        EC.element_to_be_clickable(selector), f'El elemento {selector} no se pudo clickear en {tiempo} s')
+
+
+def esperar_url(driver, fragmento, tiempo=TIEMPO_MAXIMO):
+    """Espera a que la URL actual contenga el fragmento indicado."""
+    WebDriverWait(driver, tiempo).until(
+        EC.url_contains(fragmento), f'La URL no llegó a contener {fragmento} en {tiempo} s')
+
+
+def escribir(driver, selector, texto):
+    """Espera el input, borra lo que tenga y escribe el texto."""
+    campo = esperar_visible(driver, selector)
+    campo.clear()
+    campo.send_keys(texto)
 
 
 def login(driver):
